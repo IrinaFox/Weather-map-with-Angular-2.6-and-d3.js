@@ -1,0 +1,15 @@
+.dayWeatherOptionsList {
+  background-color: #fafafa;
+}
+
+.dayWeatherOption {
+  margin: 10px;
+}
+
+.optionName {
+  font-weight: bold;
+}
+
+.mainDataOption {
+  background-color: #fafafa;
+}

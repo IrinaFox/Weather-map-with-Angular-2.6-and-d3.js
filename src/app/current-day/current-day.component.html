@@ -1,0 +1,22 @@
+<h1><span class="mainDataOption">{{currentDay.city}}, {{currentDay.countryCode}}</span></h1>
+<h2><span class="mainDataOption">{{currentDay.temperature}}</span></h2>
+<h5><span class="mainDataOption">{{currentDay.weatherState}}</span></h5>
+
+<div class="dayWeatherOptionsList">
+  <span class="dayWeatherOption">
+        <span class="optionName">Pressure: </span>
+        {{currentDay.pressure}}
+      </span>
+    <span class="dayWeatherOption">
+        <span class="optionName">Humidity: </span>
+        {{currentDay.humidity}}
+      </span>
+    <span class="dayWeatherOption">
+        <span class="optionName">Wind speed: </span>
+        {{currentDay.windSpeed}}
+      </span>
+    <span class="dayWeatherOption">
+        <span class="optionName">Clouds: </span>
+        {{currentDay.clouds}}
+    </span>
+</div>

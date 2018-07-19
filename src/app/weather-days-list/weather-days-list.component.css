@@ -1,0 +1,25 @@
+.axis path, .axis line {
+  fill: none;
+  stroke: #d9a4b2;
+}
+.axis .grid-line {
+  stroke: #d9a4b2;
+  stroke-opacity: 0.2;
+}
+.axis text {
+  font: 10px Verdana;
+}
+.bar {
+  stroke: none;
+  fill: #d9a4b2;
+  background-color: aquamarine;
+}
+
+.diagramSection {
+  margin-top: 20px;
+}
+
+.switcherList {
+  display: block;
+  text-align: left;
+}
