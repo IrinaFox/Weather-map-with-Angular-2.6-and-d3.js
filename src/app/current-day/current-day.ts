@@ -2,9 +2,6 @@ import * as moment from 'moment';
 
 export class CurrentDay {
   temperature: string;
-  date: any;
-  time: string;
-  day: string;
   windSpeed: string;
   clouds: string;
   weatherState: string;
@@ -26,9 +23,6 @@ export class CurrentDay {
     this.countryCode = data.sys.country;
     this.weatherState = data.weather[0].main;
 
-    this.date = new Date(data.dt * 1000);
-    this.time = this.date.getHours() + ':' + this.date.getMinutes() + ':' + this.date.getSeconds();
-    this.day = this.date.getUTCDate() + '.' + (this.date.getUTCMonth() + 1);
     this.currentDate = moment().format('dddd, DD MMMM');
   }
 }
