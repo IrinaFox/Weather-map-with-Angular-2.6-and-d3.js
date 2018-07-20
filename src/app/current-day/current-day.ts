@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export class CurrentDay {
   temperature: string;
   date: any;
@@ -10,6 +12,7 @@ export class CurrentDay {
   countryCode: string;
   pressure: string;
   humidity: string;
+  currentDate: string;
 
   constructor(data: any) {
     // making celsius  from Kelvin
@@ -26,5 +29,6 @@ export class CurrentDay {
     this.date = new Date(data.dt * 1000);
     this.time = this.date.getHours() + ':' + this.date.getMinutes() + ':' + this.date.getSeconds();
     this.day = this.date.getUTCDate() + '.' + (this.date.getUTCMonth() + 1);
+    this.currentDate = moment().format('dddd, DD MMMM');
   }
 }

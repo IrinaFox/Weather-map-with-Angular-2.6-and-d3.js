@@ -13,3 +13,11 @@
 .mainDataOption {
   background-color: #fafafa;
 }
+
+.currentDate {
+  background-color: #fafafa;
+}
+
+.currentDateContainer {
+  text-align: left;
+}
