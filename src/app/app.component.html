@@ -1,3 +1,21 @@
+<nav class="navbar navbar-expand-lg bg-light mainNavigation">
+  <img src="../assets/images/sun.jpg" alt="Forecast" class="forecast">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navb">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link sitename" href="javascript:void(0)">Forecast</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    </form>
+  </div>
+</nav>
+
 <div class="container" id="mainContainer">
   <app-current-day></app-current-day>
   <app-weather-days-list></app-weather-days-list>

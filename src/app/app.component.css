@@ -1,3 +1,16 @@
 #mainContainer {
   text-align: center;
 }
+
+.sitename {
+  color: black;
+}
+
+.mainNavigation {
+  margin-bottom: 20px;
+}
+
+img.forecast {
+  width: 30px;
+  height: 30px;
+}
