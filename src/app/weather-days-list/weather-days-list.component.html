@@ -1,9 +1,9 @@
 <div class="diagramSection">
   <div class="btn-group btn-group-sm switcherList">
-    <button type="button" class="btn">Wind</button>
-    <button type="button" class="btn">Temperature</button>
-    <button type="button" class="btn">Pressure</button>
-    <button type="button" class="btn">Humidity</button>
+    <button type="button" class="btn" (click)="generateDiagram('wind')">Wind</button>
+    <button type="button" class="btn" (click)="generateDiagram('temperature')">Temperature</button>
+    <button type="button" class="btn" (click)="generateDiagram('pressure')">Pressure</button>
+    <button type="button" class="btn" (click)="generateDiagram('humidity')">Humidity</button>
   </div>
 
   <div class="svgContainer"></div>

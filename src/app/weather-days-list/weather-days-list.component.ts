@@ -17,35 +17,55 @@ export class WeatherDaysListComponent implements OnInit {
 
   ngOnInit() {
     this.getWeatherDays();
-
   }
 
   getWeatherDays() {
     this.weatherDaysListService.getWeatherDays().subscribe(data => {
-        this.weatherDays = [];
+      this.weatherDays = [];
 
-        data.list.forEach((item) => {
-          const temperature = item.main.temp;
-          const date = new Date(item.dt);
+      data.list.forEach((item) => {
+        this.weatherDays.push(new WeatherDay(item));
+      });
 
-          this.weatherDays.push(new WeatherDay(item));
-        });
-
-        this.generateDiagram();
-      },
-      error => console.log(error));
+      this.generateDiagram('temperature');
+    },
+    error => console.log(error));
   }
 
-  generateDiagram() {
+  generateDiagram(index) {
     const height = 250;
     const width = 800;
     const margin = 30;
     const padding = 2;
+    const scaleYDomain = {
+      temperature: [40, 0],
+      wind: [10, 0],
+      pressure: [1025, 1015],
+      humidity: [100, 0]
+    };
+    const diagramColor = {
+      temperature: 'pink',
+      wind: 'aquamarine',
+      pressure: 'yellowgreen',
+      humidity: 'black'
+    };
+    const xAxisLength = width - 2 * margin;
+    const yAxisLength = height - 2 * margin;
     const data = [];
     let x = 1;
 
+    //clearing old diagram
+    d3.select('.svgContainer').html('');
+
     this.weatherDays.forEach((item) => {
-      data.push({x: x++, y: item.temperature, date: item.day + item.time});
+      const indexMeaning = {
+        temperature: item.temperature,
+        wind: item.wind,
+        pressure: item.pressure,
+        humidity: item.humidity
+      };
+
+      data.push({x: x++, y: indexMeaning[index], date: item.day + item.time});
     });
 
     const svg = d3.select('.svgContainer').append('svg')
@@ -53,13 +73,9 @@ export class WeatherDaysListComponent implements OnInit {
       .attr("width", width)
       .attr("height", height);
 
-    const xAxisLength = width - 2 * margin;
-    const yAxisLength = height - 2 * margin;
-
-// функция интерполяции значений на ось Х
     const scaleX = d3.scaleLinear()
       .domain([1, 16])
-      .range([0, 690]);
+      .range([0, 740]);
 
     // let scaleX = d3.scaleOrdinal()
     //   .range([1, xAxisLength])
@@ -68,25 +84,19 @@ export class WeatherDaysListComponent implements OnInit {
     //     return d.date;
     //   }));
 
-// функция интерполяции значений на ось Y
     const scaleY = d3.scaleLinear()
-      .domain([40, 0])
+      .domain(scaleYDomain[index])
       .range([0, yAxisLength]);
 
-// создаем ось X
-    let xAxis = d3.axisBottom(scaleX);
+    const xAxis = d3.axisBottom(scaleX);
+    const yAxis = d3.axisLeft(scaleY);
 
-// создаем ось Y
-    let yAxis = d3.axisLeft(scaleY);
-
-    // отрисовка оси Х
     svg.append("g")
       .attr("class", "x-axis")
-      .attr("transform",  // сдвиг оси вниз и вправо
+      .attr("transform",
         "translate(" + margin + ',' + (height - margin) + ')')
       .call(xAxis);
 
-// рисуем горизонтальные линии
     d3.selectAll("g.y-axis g.tick")
       .append("line")
       .classed("grid-line", true)
@@ -94,21 +104,21 @@ export class WeatherDaysListComponent implements OnInit {
       .attr("y1", 0)
       .attr("x2", xAxisLength)
       .attr("y2", 0);
-// создаем объект g для прямоугольников
-    let g =svg.append("g")
+
+    const g = svg.append("g")
       .attr("class", "body")
       .attr("transform",  // сдвиг объекта вправо
         "translate(" + margin + ", 0 )");
-// связываем данные с прямоугольниками
+
     g.selectAll("rect.bar")
       .data(data)
       .enter()
       .append("rect")
       .attr("class", "bar");
-// устанавливаем параметры прямоугольников
+
     g.selectAll("rect.bar")
       .data(data)
-      .attr('fill', 'pink')
+      .attr('fill', diagramColor[index])
       .attr("x", function (d) {
         return scaleX(d.x);
       })

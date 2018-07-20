@@ -19,7 +19,6 @@ export class CurrentDayComponent implements OnInit {
 
   getCurrentDay() {
     this.currentDayListService.getCurrentDay().subscribe(data => {
-      console.log(data);
         this.currentDay = new CurrentDay(data);
       },
       error => console.log(error));

@@ -13,7 +13,6 @@ export class CurrentDay {
 
   constructor(data: any) {
     // making celsius  from Kelvin
-    console.log(data);
     this.temperature = Math.round(data.main.temp - 273.15) + ' C';
 
     this.pressure = data.main.pressure;
