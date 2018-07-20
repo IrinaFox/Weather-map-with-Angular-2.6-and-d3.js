@@ -34,7 +34,7 @@ export class WeatherDaysListComponent implements OnInit {
 
   generateDiagram(index) {
     const height = 250;
-    const width = 800;
+    const width = 900;
     const margin = 30;
     const padding = 2;
     const scaleYDomain = {
@@ -75,35 +75,25 @@ export class WeatherDaysListComponent implements OnInit {
 
     const scaleX = d3.scaleLinear()
       .domain([1, 16])
-      .range([0, 740]);
+      .range([0, xAxisLength]);
 
-    // let scaleX = d3.scaleOrdinal()
-    //   .range([1, xAxisLength])
-    //   .domain(data.map((d) => {
-    //     console.log(d.date);
-    //     return d.date;
-    //   }));
+    const scaleXLiner = d3.scaleBand()
+      .rangeRound([0, xAxisLength + margin + margin / 2])
+      .domain(this.weatherDays.map((d) => {
+        return d.time;
+      }));
 
     const scaleY = d3.scaleLinear()
       .domain(scaleYDomain[index])
       .range([0, yAxisLength]);
 
-    const xAxis = d3.axisBottom(scaleX);
-    const yAxis = d3.axisLeft(scaleY);
+    const xAxis = d3.axisBottom(scaleXLiner);
 
     svg.append("g")
       .attr("class", "x-axis")
       .attr("transform",
         "translate(" + margin + ',' + (height - margin) + ')')
       .call(xAxis);
-
-    d3.selectAll("g.y-axis g.tick")
-      .append("line")
-      .classed("grid-line", true)
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", xAxisLength)
-      .attr("y2", 0);
 
     const g = svg.append("g")
       .attr("class", "body")
